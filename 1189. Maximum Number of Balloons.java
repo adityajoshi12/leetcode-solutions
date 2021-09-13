@@ -1,22 +1,14 @@
 class Solution {
-    public int maxNumberOfBalloons(String text) {
-        int bCount = 0, aCount = 0, lCount = 0, oCount = 0, nCount = 0;
-        
-        for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) == 'b') {
-                bCount++;
-            } else if (text.charAt(i) == 'a') {
-                aCount++;
-            } else if (text.charAt(i) == 'l') {
-                lCount++;
-            } else if (text.charAt(i) == 'o') {
-                oCount++;
-            } else if (text.charAt(i) == 'n') {
-                nCount++;
-            }
+ public int maxNumberOfBalloons(String text) {
+        int[] chars = new int[26]; //count all letters
+        for (char c : text.toCharArray()) {
+            chars[c - 'a']++;
         }
-        lCount = lCount / 2;
-        oCount = oCount / 2;
-        return Math.min(bCount, Math.min(aCount, Math.min(lCount, Math.min(oCount, nCount))));
+        int min = chars[1];//for b
+        min = Math.min(min, chars[0]);//for a
+        min = Math.min(min, chars[11] / 2);// for l /2 
+        min = Math.min(min, chars[14] / 2);//similarly for o/2
+        min = Math.min(min, chars[13]);//for n
+        return min;        
     }
 }
